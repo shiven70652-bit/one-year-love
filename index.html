@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Love Story ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:linear-gradient(135deg,#ffd6e7,#ffeef6,#ffc1dc);
+    color:#7b1648;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+.page{
+    min-height:100vh;
+    display:none;
+    padding:30px 18px;
+    text-align:center;
+}
+
+.page.active{
+    display:block;
+}
+
+h1{
+    font-size:clamp(35px,8vw,65px);
+    margin-top:45px;
+    color:#d41463;
+}
+
+h2{
+    color:#c2185b;
+    margin:20px 0;
+}
+
+p{
+    line-height:1.8;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.main-btn{
+    margin:25px 8px;
+    padding:15px 28px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff4f9a,#d41463);
+    color:white;
+    font-size:17px;
+    box-shadow:0 8px 20px #d4146350;
+    transition:.3s;
+}
+
+.main-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    animation:float 7s linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.card{
+    max-width:900px;
+    margin:25px auto;
+    padding:25px;
+    background:#ffffffc9;
+    border-radius:25px;
+    box-shadow:0 10px 30px #a9004d25;
+    backdrop-filter:blur(8px);
+}
+
+.date{
+    font-size:16px;
+    color:#a82a61;
+    margin-bottom:15px;
+}
+
+.grid{
+    max-width:1000px;
+    margin:25px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+}
+
+.memory{
+    background:#ffffffd9;
+    padding:12px;
+    border-radius:20px;
+    box-shadow:0 6px 20px #9d174d25;
+}
+
+.memory img,
+.memory video{
+    width:100%;
+    border-radius:15px;
+    display:block;
+}
+
+.back{
+    margin-top:30px;
+    background:#fff;
+    color:#c2185b;
+    padding:11px 22px;
+    border-radius:25px;
+    box-shadow:0 5px 15px #9d174d25;
+}
+
+.letter{
+    max-width:850px;
+    margin:30px auto;
+    text-align:left;
+    background:#fff8fc;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 35px #a0004825;
+    line-height:2;
+    white-space:pre-line;
+}
+
+.small{
+    font-size:14px;
+    opacity:.8;
+}
+
+#musicBtn{
+    position:fixed;
+    right:15px;
+    bottom:15px;
+    z-index:100;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#d41463;
+    color:white;
+    font-size:21px;
+    box-shadow:0 5px 20px #8e124555;
+}
+
+.home-note{
+    max-width:650px;
+    margin:20px auto;
+    font-size:18px;
+}
+
+.special-buttons{
+    max-width:600px;
+    margin:30px auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.special-buttons button{
+    padding:18px;
+    border-radius:22px;
+    background:#fff;
+    color:#b81759;
+    font-size:18px;
+    box-shadow:0 6px 20px #a0004820;
+}
+
+.final-title{
+    margin-top:15px;
+}
+
+@media(max-width:600px){
+    .page{
+        padding:20px 12px;
+    }
+
+    .letter{
+        padding:20px;
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+    <div style="font-size:60px;margin-top:20px;">💕</div>
+
+    <h1>Happy First Anniversary</h1>
+
+    <div class="home-note">
+        One whole year of us... 🥹❤️
+        <br>
+        One year of memories, smiles, fights, madness
+        and countless little moments.
+    </div>
+
+    <button class="main-btn" onclick="startLoveStory()">
+        🎵 Tap to start our song
+    </button>
+
+    <br>
+
+    <button class="main-btn" onclick="showPage('memories')">
+        💌 Click to see our memories
+    </button>
+
+</section>
+
+
+<!-- MEMORY MENU -->
+<section id="memories" class="page">
+
+    <h1>Our Little Story 💕</h1>
+
+    <div class="special-buttons">
+
+        <button onclick="showPage('meet')">
+            🌸 First Meet
+            <div class="small">10 December 2025</div>
+        </button>
+
+        <button onclick="showPage('date')">
+            💌 First Date
+            <div class="small">14 March 2026</div>
+        </button>
+
+        <button onclick="showPage('kiss')">
+            💋 First Kiss
+            <div class="small">30 June 2026</div>
+        </button>
+
+        <button onclick="showPage('cutie')">
+            🥰 My Cutiee
+        </button>
+
+        <button onclick="showPage('letter')">
+            💌 One Last Thing...
+        </button>
+
+    </div>
+
+    <button class="back" onclick="showPage('home')">🏠 Home</button>
+
+</section>
+
+
+<!-- FIRST MEET -->
+<section id="meet" class="page">
+
+    <h1>🌸 First Meet</h1>
+    <div class="date">10 December 2025 ❤️</div>
+
+    <div class="grid">
+
+        <div class="memory">
+            <img src="memories/first-meet/first-meet-photo-01.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/first-meet/first-meet-photo-02.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/first-meet/first-meet-photo-03.jpg">
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-meet/first-meet-video-01.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-meet/first-meet-video-02.mp4">
+            </video>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="showPage('memories')">❤️ Back</button>
+
+</section>
+
+
+<!-- FIRST DATE -->
+<section id="date" class="page">
+
+    <h1>💌 First Date</h1>
+    <div class="date">14 March 2026 ❤️</div>
+
+    <div class="grid">
+
+        <div class="memory">
+            <img src="memories/first-date/first-date-photo-01.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/first-date/first-date-photo-02.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/first-date/first-date-photo-03.jpg">
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-date/first-date-video-01.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-date/first-date-video-02.mp4">
+            </video>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="showPage('memories')">❤️ Back</button>
+
+</section>
+
+
+<!-- FIRST KISS -->
+<section id="kiss" class="page">
+
+    <h1>💋 First Kiss</h1>
+    <div class="date">30 June 2026 ❤️</div>
+
+    <div class="grid">
+
+        <div class="memory">
+            <img src="memories/first-kiss/first-kiss-photo-01.jpg">
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-kiss/first-kiss-video-01.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-kiss/first-kiss-video-02.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-kiss/first-kiss-video-03.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/first-kiss/first-kiss-video-04.mp4">
+            </video>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="showPage('memories')">❤️ Back</button>
+
+</section>
+
+
+<!-- MY CUTIEE -->
+<section id="cutie" class="page">
+
+    <h1>🥰 My Cutiee</h1>
+
+    <div class="grid">
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-01.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-02.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-03.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-04.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-05.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-06.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-07.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-08.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-09.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-10.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-11.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-12.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-13.jpg">
+        </div>
+
+        <div class="memory">
+            <img src="memories/my-cutiee/memory-photo-14.jpg">
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-01.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-02.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-03.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-04.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-05.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-06.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-07.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-08.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-09.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-10.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-11.mp4">
+            </video>
+        </div>
+
+        <div class="memory">
+            <video controls>
+                <source src="memories/my-cutiee/memory-video-12.mp4">
+            </video>
+        </div>
+
+    </div>
+
+    <button class="back" onclick="showPage('memories')">❤️ Back</button>
+
+</section>
+
+
+<!-- FINAL LETTER -->
+<section id="letter" class="page">
+
+    <h1 class="final-title">💌 One Last Thing...</h1>
+
+    <div class="letter">
+
+Ek saal hua hai tumhe meri zindagi ka hissa bane
+aur ajeeb baat hai... waqt guzarta gaya
+par tumhari mohabbat har din thodi aur gehri hoti gayi
+
+Pata hi nahi chala kab tum ek shakhs se
+meri aadat ban gayi...
+Kab tumse baat karna sirf baat nahi
+mere din ka sabse khoobsurat hissa ban gaya
+
+Pehle mulaqat thi phir baat hui
+phir dheere dheere tumse mohabbat hui
+aur ab haal ye hai...
+tumse door rehkar bhi har pal tumhare saath hone ka ehsaas hota hai
+
+Tumhare saath ye ek saal
+kabhi hasi banke guzra kabhi nok jhonk banke
+kabhi chhoti si narazgi kabhi ek pyaari si manaai
+aur kabhi bas bina kuch kahe ek doosre ko samajh lene me
+
+Shayad mohabbat perfect moments ka naam nahi
+balki un imperfect moments ko bhi dil se apna lene ka naam hai...
+Aur tumhare saath mujhe ye baat samajh aayi
+
+Tum mile to laga
+jaise zindagi ko ek khoobsurat sa sabab mil gaya
+jo dil kabhi khud se bhi nahi keh paaya
+use tumhari aankhon ne padh liya
+
+Tum meri subah ki pehli yaad ho
+meri shaam ka sukoon ho
+raat ke khamosh aasman me
+woh ek chaand ho jise dekh kar dil ruk sa jaata hai
+
+Aur sach kahu...
+tumhari tareef me jitne bhi lafz likhu
+har baar lagta hai kuch na kuch reh gaya
+
+Chand ko dekha to bas itna samjha
+roshni khoobsurat zaroor hai...
+magar tumhare saamne thodi kam hai
+
+Tumne mere lafzon ko badla
+meri khamoshiyon ko matlab diya
+meri random si baaton ko importance di
+aur meri chhoti chhoti khushiyon ko
+apni khushi bana diya
+
+Is ek saal me humne sirf waqt nahi bitaya...
+humne yaadein jama ki hain
+
+Aisi yaadein jo kal kitne bhi saal guzar jaayein
+kisi ek gaane kisi ek jagah kisi ek baarish me
+achanak tumhari yaad dila dein
+
+Ek saal ki mohabbat ka hisaab kya likhun
+tum saath thi to har lamha khaas likhun
+aur jo poocha jaaye sabse khoobsurat kya mila
+to bas tumhara naam likhun... aur kya likhun
+
+Aur haan hum hamesha perfect nahi rahe
+kabhi gussa hua kabhi misunderstanding hui
+kabhi ek doosre ko samajhne me waqt laga...
+
+par har baar ek cheez wahi rahi
+humne ek doosre ko chhodne ke bajaye
+ek doosre ko samajhna choose kiya
+
+Shayad isi wajah se ye ek saal
+sirf relationship ka first year nahi lagta...
+ye meri zindagi ke sabse khoobsurat saalon ki shuruaat lagta hai
+
+Kal kya hoga kitne saal aur milenge
+zindagi humein kis kis mod par le jayegi
+ye sab mujhe nahi pata...
+
+Bas itna pata hai
+Aaj bhi tum chahiye
+kal bhi tum chahiye
+aur agar kismat ne phir se zindagi di...
+to usme bhi mujhe tum hi chahiye
+
+Ek saal poora hua hai meri billi...
+kahaani nahi
+
+Ye to bas pehla chapter tha
+
+abhi to bahut si baarishein saath dekhni hain
+bahut si shaamein saath bitani hain
+bahut si silly fights me hasna hai
+aur bahut si yaadon ko apna banana hai
+
+Pehla saal tumhare naam
+pehli khushi tumhare naam
+aur jo bhi khoobsurat kal mera hoga...
+uske har ek hisse me tumhara naam
+
+<b>Happy First Anniversary meri pyaari billi 🥹❤️</b>
+
+Ek saal pehle tum meri zindagi me aayi thi...
+aur aaj tum meri zindagi ka woh hissa ho
+jise main kabhi alag karke dekh hi nahi sakta
+
+<b>I love you... kal se thoda zyada
+aur kal se thoda kam
+kyunki kal tumse aur zyada mohabbat karni hai ❤️🥰</b>
+
+    </div>
+
+    <button class="back" onclick="showPage('memories')">
+        ❤️ Back to Memories
+    </button>
+
+</section>
+
+
+<script>
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let musicStarted = false;
+
+function startLoveStory(){
+
+    music.play().then(()=>{
+        musicStarted = true;
+        musicBtn.innerHTML = "🔊";
+    }).catch(()=>{
+        alert("Tap the music button once to start our song ❤️");
+    });
+}
+
+function toggleMusic(){
+
+    if(music.paused){
+        music.play();
+        musicBtn.innerHTML = "🔊";
+        musicStarted = true;
+    }else{
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+    }
+}
+
+function showPage(id){
+
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    // Music only on home
+    if(id !== "home"){
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+    }
+}
+
+
+// Pause background music whenever ANY video starts
+document.addEventListener("play", function(e){
+
+    if(e.target.tagName === "VIDEO"){
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+
+        // Pause every other video
+        document.querySelectorAll("video").forEach(video=>{
+            if(video !== e.target){
+                video.pause();
+            }
+        });
+    }
+
+}, true);
+
+
+// Resume music when video ends
+document.addEventListener("ended", function(e){
+
+    if(e.target.tagName === "VIDEO"){
+
+        const homeVisible =
+            document.getElementById("home").classList.contains("active");
+
+        if(homeVisible && musicStarted){
+            music.play();
+            musicBtn.innerHTML = "🔊";
+        }
+    }
+
+}, true);
+
+
+// Floating hearts
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const hearts = ["❤️","💕","💗","💖","💓","💞","💘"];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+    heart.style.animationDuration =
+        (5 + Math.random()*5) + "s";
+
+    heart.style.fontSize =
+        (15 + Math.random()*25) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,700);
+
+</script>
+
+</body>
+</html>
